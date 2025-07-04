@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Match Result</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff69b4, #8a2be2); /* Pink and Purple */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Diamond sprinkles */
+        .sprinkles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .diamond {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            transform: rotate(45deg);
+            opacity: 0.5;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-30px) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0.5;
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .result p {
+            font-size: 20px;
+            color: #444;
+            margin: 15px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #e91e63;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #c2185b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sprinkles">
+        <!-- Generate a few diamond sprinkles manually -->
+        <div class="diamond" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="diamond" style="top: 30%; left: 50%; animation-delay: 1s;"></div>
+        <div class="diamond" style="top: 60%; left: 70%; animation-delay: 2s;"></div>
+        <div class="diamond" style="top: 80%; left: 30%; animation-delay: 1.5s;"></div>
+        <div class="diamond" style="top: 40%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="diamond" style="top: 20%; left: 60%; animation-delay: 2.5s;"></div>
+        <div class="diamond" style="top: 70%; left: 40%; animation-delay: 1.2s;"></div>
+    </div>
+
+    <div class="container">
+        <h1>Resume Match Result</h1>
+        <div class="result">
+            <p><strong>Extracted Skills:</strong> {{ skills|join:", " }}</p>
+            <p><strong>Best Job Match:</strong> {{ match }}</p>
+            <p><a href="{% url 'upload_resume' %}">Try Another Resume</a></p>
+            <p><a href="{% url 'home' %}">Back to Home</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

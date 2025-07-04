@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resume</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Double color background */
+            background-size: 400% 400%;
+            animation: gradientBG 6s ease infinite;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Sprinkles effect */
+        @keyframes sprinkle {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(50px);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        .sprinkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .sprinkles div {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            animation: sprinkle 2s linear infinite;
+        }
+
+        .sprinkles div:nth-child(odd) {
+            animation-duration: 3s;
+        }
+
+        .sprinkles div:nth-child(even) {
+            animation-duration: 4s;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            padding: 30px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: rgb(13, 215, 215);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: rgb(13, 215, 215);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 16px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation for the gradient background */
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sprinkles">
+        <!-- Random Sprinkles -->
+        <div style="top: 10%; left: 20%; animation-duration: 3s;"></div>
+        <div style="top: 30%; left: 40%; animation-duration: 2.5s;"></div>
+        <div style="top: 50%; left: 60%; animation-duration: 4s;"></div>
+        <div style="top: 70%; left: 80%; animation-duration: 3.5s;"></div>
+        <div style="top: 20%; left: 80%; animation-duration: 2.5s;"></div>
+        <div style="top: 40%; left: 10%; animation-duration: 3s;"></div>
+        <div style="top: 60%; left: 30%; animation-duration: 4s;"></div>
+        <div style="top: 80%; left: 50%; animation-duration: 2.5s;"></div>
+        <div style="top: 10%; left: 60%; animation-duration: 3.5s;"></div>
+        <div style="top: 30%; left: 70%; animation-duration: 4s;"></div>
+    </div>
+
+    <div class="card">
+        <h1>Upload Your Resume</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+        <p><a href="{% url 'home' %}" class="back-link">Back to Home</a></p>
+    </div>
+
+</body>
+</html>
